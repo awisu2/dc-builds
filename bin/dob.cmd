@@ -1,12 +1,11 @@
 @echo off
 REM docker-build(dob)
 REM 
-REM dob.cmd {command} {option} で起動
+REM Command: dob.cmd command option
 REM ビルドしたdockerを簡単に実行する補助コマンド
 REM 
 
 REM docker用に /mnt/{drive}/{path} の形式に変換
-SET DIR=%CD%
 SET DIR=/mnt/%CD:\=/%
 SET DIR=%DIR::=%
 
@@ -17,7 +16,8 @@ SET IMAGE=%1
 SET args=%*
 call :shift %args%
 
-call :run_we docker run --rm -it -v %DIR%:/local -w /local %IMAGE% %IMAGE% %args%
+call :run_we docker run --rm -it -v %DIR%:%SHARE_DIR% -w %SHARE_DIR% %IMAGE% ls -la
+call :run_we docker run --rm -it -v %DIR%:%SHARE_DIR% -w %SHARE_DIR% %IMAGE% %IMAGE% %args%
 GOTO END
 
 REM run with echo ==================================================
