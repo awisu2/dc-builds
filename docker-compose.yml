@@ -1,0 +1,13 @@
+version: "3.5"
+
+services:
+  yarn:
+    image: yarn
+    build:
+      context: .
+      dockerfile: ./docker/webpack.Dockerfile
+  webpack:
+    image: webpack
+    build:
+      context: .
+      dockerfile: ./docker/webpack.Dockerfile
